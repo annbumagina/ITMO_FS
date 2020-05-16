@@ -1,20 +1,16 @@
 import numpy as np
 from math import log
+import collections
 
 def probability(x):
     """
     Probability distribution of random variable x
     """
+    coll = collections.Counter(x)
     n = len(x)
-    dict_x = dict()
-    for k in range(n):
-        if x[k] not in dict_x:
-            dict_x.update({x[k]: 1})
-        else:
-            dict_x[x[k]] += 1
-    for key, value in dict_x.items():
-        dict_x[key] = value / n
-    return dict_x
+    for key, value in coll.most_common():
+        coll[key] = value / n
+    return coll
 
 def joint_entropy(X):
     """
